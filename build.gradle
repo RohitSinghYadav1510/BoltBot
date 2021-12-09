@@ -78,11 +78,17 @@ static def getBranchName() {
 
 jib {
     from {
-        image = 'openjdk:12'
+        
+	image = 'openjdk:12'
     }
     to {
-        image = "techtony96/boltbot:$project_version-".toString() + getCommitHash()
-        switch (System.getenv('GIT_BRANCH')) {
+        
+	image = "987429592769.dkr.ecr.ap-south-1.amazonaws.com/mydockerrepo:latest"
+        credHelper = 'ecr-login'
+
+	/*
+	"techtony96/boltbot:$project_version-".toString() + getCommitHash()
+	switch (System.getenv('GIT_BRANCH')) {
             case 'refs/heads/master':
                 tags = ['latest']
                 break
@@ -96,7 +102,11 @@ jib {
             username = 'techtony96'
             password = System.getenv('DOCKER_PASSWORD')
         }
+	*/
+
     }
+    
+
     container {
         jvmFlags = ['-Xms512m', '-Xmx512m']
         mainClass = 'com.discordbolt.boltbot.BoltBot'
